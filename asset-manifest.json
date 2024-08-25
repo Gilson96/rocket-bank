@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/rocket-bank/static/css/main.caa1d73c.css",
+    "main.js": "/rocket-bank/static/js/main.864804c8.js",
+    "static/media/Logo-visa-icon-PNG.png": "/rocket-bank/static/media/Logo-visa-icon-PNG.5e52d902838008b1db16.png",
+    "index.html": "/rocket-bank/index.html",
+    "main.caa1d73c.css.map": "/rocket-bank/static/css/main.caa1d73c.css.map",
+    "main.864804c8.js.map": "/rocket-bank/static/js/main.864804c8.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.caa1d73c.css",
+    "static/js/main.864804c8.js"
+  ]
+}
