@@ -16,7 +16,7 @@ const SmallScreenDashboard = () => {
   const { data: user = [] } = useGetUserQuery()
 
   return (
-    <section className='flex flex-col px-[7%] py-[8%] w-full small-phone:h-full tablet:h-full'>
+    <section className='flex flex-col px-[7%] py-[8%] w-full small-phone:h-[40rem] overflow-hidden tablet:h-full'>
 
       <div className='flex items-center w-full'>
         <div className='flex h-full w-full items-center justify-between py-[2%] '>
