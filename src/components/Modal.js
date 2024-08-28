@@ -21,7 +21,7 @@ const MyModal = ({ onOpen, onClose, isOpen, children, title, width }) => {
                     width={width}
                     
                 >
-                    <ModalHeader fontSize={'1.5rem'} backgroundColor={'#233D4D'}>{title}</ModalHeader>
+                    <ModalHeader fontSize={'1.5rem'}>{title}</ModalHeader>
                     <Divider/>
                     <ModalCloseButton />
                     <ModalBody backgroundColor={'black'}>

@@ -1,19 +1,18 @@
 import { Select } from '@chakra-ui/react'
 import { useState } from 'react'
 import { CurrencyPoundIcon } from '@heroicons/react/24/outline';
-import { InputGroup, InputLeftElement, NumberDecrementStepper, NumberInputStepper, NumberIncrementStepper, NumberInputField, NumberInput, Button } from '@chakra-ui/react'
+import { InputGroup, InputLeftElement, NumberDecrementStepper, NumberInputStepper, NumberIncrementStepper, NumberInputField, NumberInput, Button, Box, SkeletonCircle, SkeletonText } from '@chakra-ui/react'
 import { CheckCircleIcon } from '@heroicons/react/24/outline'
 import { useGetAccountQuery, useUpdateAccountBalanceMutation, useCreateTransactionMutation } from '../features/apiSlice'
 import MyButton from '../UI/Button'
 
-const Transfer = ({onClose}) => {
+const Transfer = ({ onClose }) => {
     const [submitted, setSubmitted] = useState(false)
     const [fromId, setFromId] = useState()
     const [toId, setToId] = useState()
     const { data: user = [], isLoading } = useGetAccountQuery()
     const [createTransaction] = useCreateTransactionMutation()
     const [editAccountBalance] = useUpdateAccountBalanceMutation()
-    const [isActive, setIsActive] = useState('')
 
     if (isLoading) return <p>Loading</p>
 
@@ -75,56 +74,71 @@ const Transfer = ({onClose}) => {
             {!submitted ?
                 <>
                     <p className='text-sm italic'>Please set the amount desired to tranfer</p>
-                    <div >
-                        <p>From</p>
-                        <Select
-                            placeholder='Select account'
-                            textColor={'grey'}
-                            value={fromId}
-                            onChange={e => { setFromId(e.target.value) }}
-                            required
-                        >
-                            {user.map(account => (
-                                <option value={account.id} className='text-black'>{account.accountType} account</option>
-                            ))}
-                        </Select>
-                    </div>
-                    <div>
-                        <p>To</p>
-                        <Select
-                            placeholder='Select account'
-                            textColor={'grey'}
-                            value={toId}
-                            onChange={e => { setToId(e.target.value) }}
-                            required
-                        >
-                            {user.map(account => (
-                                <option value={account.id} className='text-black'>{account.accountType} account</option>
-                            ))}
-                        </Select>
-                    </div>
 
-                    <InputGroup marginTop={'3%'} >
-                        <InputLeftElement pointerEvents='none'>
-                            <CurrencyPoundIcon className='h-6 w-6 text-gray-400' />
-                        </InputLeftElement>
-                        <NumberInput allowMouseWheel defaultValue={0} min={0} className='w-[27rem]'>
-                            <NumberInputField name='balance' width={'100%'} textAlign={'right'} paddingRight={'15%'} required/>
-                            <NumberInputStepper>
-                                <NumberIncrementStepper />
-                                <NumberDecrementStepper />
-                            </NumberInputStepper>
-                        </NumberInput>
-                    </InputGroup>
+                    {isLoading ?
 
-                    <div className='flex w-full justify-end gap-2 mt-2'>
-                        <Button className='border bg-transparent border-white  text-white rounded-md w-[5rem] ease-in-out delay-150 hover:-translate-y-1 hover:scale-105  duration-200 hover:bg-white/15' onClick={onClose}>Close</Button>
-                        <MyButton
-                            styles={'cursor-pointer border-none bg-mediumBlue'}
-                            text={'Submit'}
-                            
-                        />
-                    </div>
+                        <Box
+                            padding='6' boxShadow='lg' bg='black'
+                            width={'100%'}
+                        >
+                            <SkeletonText mt='4' noOfLines={4} spacing='4' skeletonHeight='2' />
+                        </Box>
+
+                        :
+                        <>
+
+                            <div>
+                                <p>From</p>
+                                <Select
+                                    placeholder='Select account'
+                                    textColor={'grey'}
+                                    value={fromId}
+                                    onChange={e => { setFromId(e.target.value) }}
+                                    required
+                                >
+                                    {user.map(account => (
+                                        <option value={account.id} className='text-black'>{account.accountType} account</option>
+                                    ))}
+                                </Select>
+                            </div>
+                            <div>
+                                <p>To</p>
+                                <Select
+                                    placeholder='Select account'
+                                    textColor={'grey'}
+                                    value={toId}
+                                    onChange={e => { setToId(e.target.value) }}
+                                    required
+                                >
+                                    {user.map(account => (
+                                        <option value={account.id} className='text-black'>{account.accountType} account</option>
+                                    ))}
+                                </Select>
+                            </div>
+
+                            <InputGroup marginTop={'3%'} >
+                                <InputLeftElement pointerEvents='none'>
+                                    <CurrencyPoundIcon className='h-6 w-6 text-gray-400' />
+                                </InputLeftElement>
+                                <NumberInput allowMouseWheel defaultValue={0} min={0} className='w-[27rem]'>
+                                    <NumberInputField name='balance' width={'100%'} textAlign={'right'} paddingRight={'15%'} required />
+                                    <NumberInputStepper>
+                                        <NumberIncrementStepper />
+                                        <NumberDecrementStepper />
+                                    </NumberInputStepper>
+                                </NumberInput>
+                            </InputGroup>
+
+                            <div className='flex w-full justify-end gap-2 mt-2'>
+                                <Button className='border bg-transparent border-white  text-white rounded-md w-[5rem] ease-in-out delay-150 hover:-translate-y-1 hover:scale-105  duration-200 hover:bg-white/15' onClick={onClose}>Close</Button>
+                                <MyButton
+                                    styles={'cursor-pointer border-none bg-mediumBlue'}
+                                    text={'Submit'}
+
+                                />
+                            </div>
+                        </>
+                    }
                 </>
                 :
                 <>

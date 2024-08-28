@@ -38,7 +38,8 @@ const Panel = () => {
                     <SwiperSlide>
                         <div className='flex items-center py-2 px-10 justify-center'>
                             <Card
-                                styles={`${account.color} w-[20rem] h-[13rem] text-white ml-[3%] medium-laptop:w-[25rem] medium-laptop:h-[15rem] medium-laptop:text-xl`}
+                                styles={`${account.color} w-[20rem] h-[13rem] text-white ml-[3%] medium-laptop:w-[25rem] medium-laptop:h-[15rem] medium-laptop:text-xl
+                                laptop:p-[4%] `}
                                 accountNumber={account.accountNumber}
                                 accountType={account.accountType}
                                 balance={account.balance}
@@ -67,7 +68,7 @@ const Panel = () => {
                     icon={<ArrowsUpDownIcon className='h-7 w-7 text-white medium-laptop:h-8 medium-laptop:w-8' />}
                     onOpen={onOpen}
                 />
-                {isActive === 'transfer' && <MyModal isOpen={isOpen} onClose={onClose} title={'Transfer Money'}><Transfer /></MyModal>}
+                {isActive === 'transfer' && <MyModal isOpen={isOpen} onClose={onClose} title={'Transfer Money'}><Transfer onClose={onClose} /></MyModal>}
 
             </div>
 
